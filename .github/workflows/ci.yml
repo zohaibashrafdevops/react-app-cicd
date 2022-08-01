@@ -1,7 +1,7 @@
 name: CI 
 on:
   pull_request:
-    branches: [cidevelop]
+      branches: [cidevelop]
   # push:
   #   branches: [cidevelop]
       
