@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: "12.x"
       - run: npm install
-      # - run: npm run format:check
-      # - run: npm run format
+      - run: npm run format:check
+      - run: npm run format
       - run: npm test -- --coverage
         env:
           CI: true
@@ -25,8 +25,7 @@ jobs:
         run: npm run build
       - name: Deploy to staging
         if: github.event_name == 'push'
-        run: npx surge --project ./build --domain 
-        boundless-sheet.surge.sh
+        run: npx surge --project ./build --domain boundless-sheet.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
