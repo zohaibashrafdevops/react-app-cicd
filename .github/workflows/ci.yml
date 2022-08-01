@@ -2,8 +2,8 @@ name: CI
 on:
   pull_request:
     branches: [cidevelop]
-  # push:
-  #   branches: [cidevelop]
+  push:
+    branches: [cidevelop]
       
 jobs:
   build:
@@ -16,15 +16,15 @@ jobs:
           node-version: "12.x"
       - run: npm install
       - run: npm run format
-      - run: npm test -- --coverage
+      # - run: npm test -- --coverage
         env:
           CI: true
-      # - name: Build project
-      #   if: github.event_name == 'push'
-      #   run: npm run build
-      # - name: Deploy to staging
-      #   if: github.event_name == 'push'
-      #   run: npx surge --project ./build --domain boundless-sheet.surge.sh
-      #   env:
-      #     SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      #     SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      - name: Build project
+        if: github.event_name == 'push'
+        run: npm run build
+      - name: Deploy to staging
+        if: github.event_name == 'push'
+        run: npx surge --project ./build --domain boundless-sheet.surge.sh
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
